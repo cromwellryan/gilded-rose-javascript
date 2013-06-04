@@ -4,7 +4,8 @@ describe("Gilded Rose", function() {
       vest = null,
       brie = null,
       elixir = null,
-      tix = null;
+      tix = null,
+      conjured = null;
 
   beforeEach( function() {
     init();
@@ -14,6 +15,7 @@ describe("Gilded Rose", function() {
     elixir = items[2];
     sulfuras = items[3];
     tix = items[4];
+    conjured = items[5];
   });
 
   it("qualities are known", function() {
@@ -22,7 +24,7 @@ describe("Gilded Rose", function() {
     expect(elixir.quality).toBe(7);
     expect(sulfuras.quality).toBe(80);
     expect(tix.quality).toBe(20);
-    expect(items[5].quality).toBe(6);
+    expect(conjured.quality).toBe(6);
   });
 
   describe("vests", function() {
@@ -110,6 +112,18 @@ describe("Gilded Rose", function() {
     it("is worthless after event day", function() {
       times(20, update_quality);
       expect(tix.quality).toBe(0);
+    });
+  });
+
+  xdescribe("conjured", function() {
+    it("never goes negative", function() {
+      times(conjured.sell_in * 2, update_quality);
+      expect(conjured.quality).toBe(0);
+    });
+
+    it("degrades at 2 per day", function() {
+      update_quality();
+      expect(conjured.quality).toBe(4);
     });
   });
 
