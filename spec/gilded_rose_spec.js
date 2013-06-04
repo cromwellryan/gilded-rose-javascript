@@ -3,6 +3,7 @@ describe("Gilded Rose", function() {
   var sulfuras = null,
       vest = null,
       brie = null,
+      elixir = null,
       tix = null;
 
   beforeEach( function() {
@@ -10,6 +11,7 @@ describe("Gilded Rose", function() {
 
     vest = items[0];
     brie = items[1];
+    elixir = items[2];
     sulfuras = items[3];
     tix = items[4];
   });
@@ -17,9 +19,9 @@ describe("Gilded Rose", function() {
   it("qualities are known", function() {
     expect(vest.quality).toBe(20);
     expect(brie.quality).toBe(0);
-    expect(items[2].quality).toBe(7);
+    expect(elixir.quality).toBe(7);
     expect(sulfuras.quality).toBe(80);
-    expect(items[4].quality).toBe(20);
+    expect(tix.quality).toBe(20);
     expect(items[5].quality).toBe(6);
   });
 
@@ -68,23 +70,21 @@ describe("Gilded Rose", function() {
   });
 
   describe("elixir", function() {
-    it("go to 19 after 1 update", function() {
+    it("go to 6 after 1 update", function() {
       update_quality()
-      expect(vest.quality).toBe(19)
+      expect(elixir.quality).toBe(6)
     });
     
     it("never go negative", function() {
-      times(25, update_quality);
-      expect(vest.quality).toBe(0);
+      times(elixir.sell_in * 2, update_quality);
+      expect(elixir.quality).toBe(0);
     });
 
-    it("deteriorate at 2 after 10 days", function() { 
-      times(10, update_quality);
-      expect(vest.quality).toBe(10);
+    it("deteriorate at 2 after 5 days", function() { 
+      times(elixir.sell_in, update_quality);
+      expect(elixir.quality).toBe(2);
       update_quality();
-      expect(vest.quality).toBe(8);
-      update_quality();
-      expect(vest.quality).toBe(6);
+      expect(elixir.quality).toBe(0);
     });
  
   });
