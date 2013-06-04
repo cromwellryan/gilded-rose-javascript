@@ -34,14 +34,10 @@ function update_quality() {
         item.quality = item.quality + 1
         if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
           if (item.sell_in < 11) {
-            if (item.quality < 50) {
-              item.quality = item.quality + 1
-            }
+            item.quality = item.quality + 1
           }
           if (item.sell_in < 6) {
-            if (item.quality < 50) {
-              item.quality = item.quality + 1
-            }
+            item.quality = item.quality + 1
           }
         }
       }
