@@ -2,7 +2,8 @@ describe("Gilded Rose", function() {
 
   var sulfuras = null,
       vest = null,
-      brie = null;
+      brie = null,
+      tix = null;
 
   beforeEach( function() {
     init();
@@ -10,6 +11,7 @@ describe("Gilded Rose", function() {
     vest = items[0];
     brie = items[1];
     sulfuras = items[3];
+    tix = items[4];
   });
 
   it("qualities are known", function() {
@@ -85,6 +87,30 @@ describe("Gilded Rose", function() {
       expect(vest.quality).toBe(6);
     });
  
+  });
+
+  describe("concert tix", function() {
+    it("increases by 1 up to 10 days", function() {
+      times(5, update_quality);
+      expect(tix.quality).toBe(25);
+    });
+
+    it("increases by 2 between day 10 and 5", function() {
+      times(5, update_quality); // normal
+      update_quality();
+      expect(tix.quality).toBe(27);
+    })
+
+    it("increases by 3 between day 5 and event day", function() {
+      times(10, update_quality);
+      update_quality();
+      expect(tix.quality).toBe(38);
+    });
+
+    it("is worthless after event day", function() {
+      times(20, update_quality);
+      expect(tix.quality).toBe(0);
+    });
   });
 
   function times(number, func) {
