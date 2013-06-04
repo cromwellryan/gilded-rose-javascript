@@ -1,18 +1,20 @@
 describe("Gilded Rose", function() {
 
   var sulfuras = null,
-      vest = null;
+      vest = null,
+      brie = null;
 
   beforeEach( function() {
     init();
 
     vest = items[0];
+    brie = items[1];
     sulfuras = items[3];
   });
 
   it("qualities are known", function() {
     expect(vest.quality).toBe(20);
-    expect(items[1].quality).toBe(0);
+    expect(brie.quality).toBe(0);
     expect(items[2].quality).toBe(7);
     expect(sulfuras.quality).toBe(80);
     expect(items[4].quality).toBe(20);
@@ -44,6 +46,22 @@ describe("Gilded Rose", function() {
     it("never degrades", function() {
       times(100, update_quality);
       expect(sulfuras.quality).toBe(80);
+    });
+  });
+
+  describe("aged brie", function() {
+    it("get's slightly better until sell date", function() {
+      update_quality();
+      expect(brie.quality).toBe(1);
+    });
+
+    it("get's really good after it's sell date", function() {
+      update_quality();
+      update_quality(); // sell date
+      update_quality(); // mmm
+      expect(brie.quality).toBe(4);
+      update_quality(); // mmm
+      expect(brie.quality).toBe(6);
     });
   });
 
