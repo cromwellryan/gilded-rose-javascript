@@ -21,12 +21,10 @@ function update_quality() {
   for (var i = 0; i < items.length; i++) {
     var item = items[i];
 
-    if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert') {
-      if (item.name != 'Sulfuras, Hand of Ragnaros') {
+    if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert' && item.name != 'Sulfuras, Hand of Ragnaros') {
         if (item.quality > 0) {
           item.quality = item.quality - 1
         }
-      }
     } else {
       if (item.quality < 50) {
         item.quality = item.quality + 1
